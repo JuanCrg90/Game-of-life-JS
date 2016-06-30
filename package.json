@@ -4,7 +4,13 @@
   "description": "Conway's Game of life js implementation",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf dist",
+    "lint": "eslint .",
+    "dist": "babel index.js lib/**/*.js --out-dir dist --presets es2015",
+    "serve": "NODE_PATH=./dist node dist",
+    "develop": "babel-node --presets es2015 index.js",
+    "test": "npm run clean && npm run lint && babel-tape-runner test/**/*-test.js |tap-spec",
+    "start": "npm run clean && npm run lint && npm run dist && npm run serve"
   },
   "author": "Juan Carlos Ruiz <JuanCrg90@gmail.com>",
   "license": "MIT",
