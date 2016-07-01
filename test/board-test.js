@@ -8,7 +8,7 @@ test('Should exists', (t) => {
 
   t.ok(Board, 'Board should exists');
   t.equals(typeof Board, 'function', 'Board should be a function');
-  t.ok(board instanceof Board, 'board should be an instance of board');
+  t.ok(board instanceof Board, 'board should be an instance of Board');
   t.end();
 });
 
