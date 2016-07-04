@@ -23,6 +23,7 @@ test('Has width getter', (t) => {
   const board = new Board(10, 10);
 
   t.ok(board.getWidth, 'Should exists');
+  t.equals(board.getWidth(), 10, 'Getter return width');
   t.end();
 });
 
@@ -37,6 +38,7 @@ test('Has heigth getter', (t) => {
   const board = new Board(10, 10);
 
   t.ok(board.getHeigth, 'Should exists');
+  t.equals(board.getHeigth(), 10, 'Getter return heigth');
   t.end();
 });
 
@@ -51,6 +53,7 @@ test('Has grid getter', (t) => {
   const board = new Board(10, 10);
 
   t.ok(board.getGrid, 'Should exists');
+  t.equals(board.getGrid().length, 10, 'Getter return grid');
   t.end();
 });
 

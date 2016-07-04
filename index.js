@@ -1,18 +1,39 @@
 import Gol from './lib/gol';
-import Cell from './lib/cell';
 
-const initialConf = [
-  [new Cell(false), new Cell(true), new Cell(false)],
-  [new Cell(false), new Cell(true), new Cell(false)],
-  [new Cell(false), new Cell(true), new Cell(false)]
-];
+const gol = new Gol(100, 40);
 
-const gol = new Gol(50, 50);
+/**
+ * Display the board status in the CLI
+ */
+function display(status) {
+  const width = status[0].length;
+  const heigth = status.length;
+  const Console = console;
 
+  Console.log('\n\n\n')
+
+  for (let i = 0; i < heigth; i++) {
+    let rowContent = '';
+    for (let j = 0; j < width; j++) {
+      if (!!status[i][j]) {
+        rowContent += '@';
+      } else {
+        rowContent += '-';
+      }
+    }
+    Console.log(rowContent);
+  }
+}
+
+/**
+ * Execute the gol rules and call the display
+ */
 function run() {
-  process.stdout.write('\x1B[2J\x1B[0f');
-  gol.display();
+  display(gol.getLogicStatus());
   gol.execute();
 }
 
+/**
+ * Call run every 500 ms
+ */
 setInterval(run, 500);

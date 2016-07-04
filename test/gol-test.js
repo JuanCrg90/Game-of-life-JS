@@ -1,8 +1,9 @@
 import test from 'tape';
 import Gol from '../lib/gol';
+import Cell from '../lib/cell';
 
 test('Should exists', (t) => {
-  const gol = new Gol(10, 10);
+  const gol = new Gol();
 
   t.ok(Gol, 'Gol should exists');
   t.equals(typeof Gol, 'function', 'Gol should be a function');
@@ -10,9 +11,37 @@ test('Should exists', (t) => {
   t.end();
 });
 
-test('Has Display Function', (t) => {
-  const gol = new Gol(10, 10);
-  t.ok(gol.display, 'should exists');
+test('Has getLogicStatus Function', (t) => {
+  const gol = new Gol();
+  t.ok(gol.getLogicStatus, 'should exists');
   t.end();
 });
 
+test('Execute Blinker Oscilator', (t) => {
+  const initialConf = [
+    [new Cell(false), new Cell(false), new Cell(false), new Cell(false), new Cell(false)],
+    [new Cell(false), new Cell(false), new Cell(true), new Cell(false), new Cell(false)],
+    [new Cell(false), new Cell(false), new Cell(true), new Cell(false), new Cell(false)],
+    [new Cell(false), new Cell(false), new Cell(true), new Cell(false), new Cell(false)],
+    [new Cell(false), new Cell(false), new Cell(false), new Cell(false), new Cell(false)],
+  ];
+
+  const gol = new Gol(initialConf[0].length, initialConf.length, initialConf);
+
+  t.ok(gol.getLogicStatus, 'should exists');
+  t.deepEqual(gol.getLogicStatus(), [
+    [0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0]]);
+  gol.execute();
+  t.deepEqual(gol.getLogicStatus(), [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0]]);
+
+  t.end();
+});
